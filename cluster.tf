@@ -7,6 +7,7 @@ resource "aws_elasticache_cluster" "redis" {
   parameter_group_name = aws_elasticache_parameter_group.default.name
   port                 = 6379
   subnet_group_name    = aws_elasticache_subnet_group.subnet-group.name
+  security_group_ids   = [aws_security_group.allow_redis.id]
 }
 
 # Creates Parameter Group
@@ -28,7 +29,7 @@ resource "aws_security_group" "allow_redis" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description      = "TLS from VPC"
+    description      = "redis+ from VPC"
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
