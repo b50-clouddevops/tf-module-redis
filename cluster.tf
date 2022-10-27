@@ -30,7 +30,7 @@ resource "aws_security_group" "allow_redis" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description      = "redis port from def vpc"
+    description      = "Allow Redis Connection From Default VPC"
     from_port        = 6379
     to_port          = 6379
     protocol         = "tcp"
@@ -38,11 +38,11 @@ resource "aws_security_group" "allow_redis" {
   }
 
   ingress {
-    description      = "redis port from def vpc"
+    description      = "Allow Redis Connection From Private VPC"
     from_port        = 6379
     to_port          = 6379
     protocol         = "tcp"
-    cidr_blocks      = [data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]
+    cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
   }
 
   egress {
