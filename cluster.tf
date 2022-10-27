@@ -6,6 +6,7 @@ resource "aws_elasticache_cluster" "redis" {
   num_cache_nodes      = 1                      # An ideal prod-cluster should have 3 nodes.
   parameter_group_name = aws_elasticache_parameter_group.default.name
   port                 = 6379
+  subnet_group_name    = aws_elasticache_subnet_group.subnet-group.name
 }
 
 # Creates Parameter Group
@@ -16,8 +17,8 @@ resource "aws_elasticache_parameter_group" "default" {
 
 # Creates subnet Group
 resource "aws_elasticache_subnet_group" "subnet-group" {
-  name       = "roboshop-redis-${var.ENV}"
-  subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
+  name               = "roboshop-redis-${var.ENV}"
+  subnet_ids         = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
 }
 
 # # Creates DocDB Cluster
