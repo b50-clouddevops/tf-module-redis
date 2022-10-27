@@ -25,7 +25,7 @@ resource "aws_elasticache_subnet_group" "subnet-group" {
 resource "aws_security_group" "allow_redis" {
   name        = "roboshop-redis-${var.ENV}"
   description = "roboshop-redis-${var.ENV}"
-  vpc_id      = ???
+  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
     description      = "TLS from VPC"
