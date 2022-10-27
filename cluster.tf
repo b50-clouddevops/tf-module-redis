@@ -15,7 +15,10 @@ resource "aws_elasticache_parameter_group" "default" {
 }
 
 # Creates subnet Group
-
+resource "aws_elasticache_subnet_group" "subnet-group" {
+  name       = "roboshop-redis-${var.ENV}"
+  subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
+}
 
 # # Creates DocDB Cluster
 # resource "aws_docdb_cluster" "docdb" {
