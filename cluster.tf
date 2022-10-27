@@ -1,11 +1,11 @@
 # Creates Redis Cluster
 resource "aws_elasticache_cluster" "redis" {
   cluster_id           = "redis-${var.ENV}"
-  engine               = ""
-  node_type            = "cache.m4.large"
-  num_cache_nodes      = 2
-  parameter_group_name = "default.memcached1.4"
-  port                 = 11211
+  engine               = "redis"
+  node_type            = "cache.t3.small"
+  num_cache_nodes      = 1                      # An ideal prod-cluster should have 3 nodes.
+  parameter_group_name = ????
+  port                 = 6379
 }
 
 
