@@ -37,6 +37,14 @@ resource "aws_security_group" "allow_redis" {
     cidr_blocks      = [data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]
   }
 
+  ingress {
+    description      = "redis port from def vpc"
+    from_port        = 6379
+    to_port          = 6379
+    protocol         = "tcp"
+    cidr_blocks      = [data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
