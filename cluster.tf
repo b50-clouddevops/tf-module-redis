@@ -1,6 +1,6 @@
 # Creates Redis Cluster
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "redis-${var.ENV}"
+  cluster_id           = "roboshop-${var.ENV}"
   engine               = "redis"
   node_type            = "cache.t3.small"
   num_cache_nodes      = 1                      # An ideal prod-cluster should have 3 nodes.
@@ -10,7 +10,7 @@ resource "aws_elasticache_cluster" "redis" {
 
 
 resource "aws_elasticache_parameter_group" "default" {
-  name   = "cache-params"
+  name   = "roboshop-redis-${var.ENV}"
   family = "redis2.8"
 }
 
