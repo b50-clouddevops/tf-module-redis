@@ -29,12 +29,11 @@ resource "aws_security_group" "allow_redis" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description      = "redis+ from VPC"
-    from_port        = 443
-    to_port          = 443
+    description      = "redis port from def vpc"
+    from_port        = 6379
+    to_port          = 6379
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.main.cidr_block]
-    ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+    cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_ID]
   }
 
   egress {
