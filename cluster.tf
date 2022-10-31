@@ -5,7 +5,7 @@ resource "aws_elasticache_cluster" "redis" {
   node_type            = var.ELASTICCACHE_NODE_TYPE
   num_cache_nodes      = var.ELASTICCACHE_NODE_COUNT          # An ideal prod-cluster should have 3 nodes.
   parameter_group_name = aws_elasticache_parameter_group.default.name
-  engine_version       = "6.x"
+  engine_version       = var.ELASTICCACHE_ENGINE_VERSION
   port                 = var.ELASTICCACHE_PORT
   subnet_group_name    = aws_elasticache_subnet_group.subnet-group.name
   security_group_ids   = [aws_security_group.allow_redis.id]
