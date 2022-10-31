@@ -6,4 +6,6 @@
 #   records = [aws_elasticache_cluster.redis.cluster_address]
 # }
 
-output "redis-output"
+output "redis-output" {
+  value = aws_elasticache_cluster.redis
+}
